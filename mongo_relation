@@ -1,1 +1,76 @@
-use students;
+use youtube
+
+youtube> db.createCollection("users")
+{ ok: 1 }
+
+db.users.insertOne({
+    "name": "ramesh",
+    "video": {
+        "topic": "comedy",
+        "length":5
+    }
+})
+
+
+
+youtube> db.users.find({});
+[
+  { _id: ObjectId('68041e1d86bccb805e4d7942') },
+  { _id: ObjectId('68041ea23479d252a14d7942') },
+  {
+    _id: ObjectId('68041f273479d252a14d7943'),
+    name: 'ramesh',
+    video: { topic: 'comedy', length: 5 }
+  }
+]
+
+
+
+youtube> db.users.deleteOne({"_id": ObjectId('68041e1d86bccb805e4d7942')})
+{ acknowledged: true, deletedCount: 1 }
+youtube> db.users.find({});
+[
+  { _id: ObjectId('68041ea23479d252a14d7942') },
+  {
+    _id: ObjectId('68041f273479d252a14d7943'),
+    name: 'ramesh',
+    video: { topic: 'comedy', length: 5 }
+  }
+
+================================================================================================================
+person and video:
+
+youtube> db.persons.insertOne({
+...     "name": "desh deepak",
+...     "isVerified": true,
+...     "earning": 4000
+... })
+{
+  acknowledged: true,
+  insertedId: ObjectId('680422283479d252a14d7944')
+}
+
+
+youtube> db.videos.insertOne({
+...     "topic": "fun one",
+...     "length": 5,
+...     "creator": ObjectId('680422283479d252a14d7944')
+... })
+{
+  acknowledged: true,
+  insertedId: ObjectId('6804229b3479d252a14d7945')
+}
+
+
+youtube> db.videos.find()
+[
+  {
+    _id: ObjectId('6804229b3479d252a14d7945'),
+    topic: 'fun one',
+    length: 5,
+    creator: ObjectId('680422283479d252a14d7944')
+  }
+]
+
+
+
